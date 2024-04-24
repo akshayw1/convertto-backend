@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int            @id @default(autoincrement())
+  first_name      String        
+  last_name String      
+  last_login DateTime
+  phone_number String
+  email          String         @unique
+  password       String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  subscriptions  Subscription[]
+  apps           Apps[]
+}
+
+model Subscription {
+  id             Int            @id @default(autoincrement())
+  plan           Plan         @relation(fields: [planId], references: [id])
+  planId         Int
+  users          User[]         // Subscription can have multiple users
+}
+
+
+model Plan {
+  id             Int            @id @default(autoincrement())
+  plan_name String
+  plan_features String
+  plan_category String
+  plan_price Int
+  plan_duration String
+  app_build_allowed String
+  subcription Subscription[]
+}
+model Apps {
+  id             Int            @id @default(autoincrement())
+  customization  String?        // Store customization details as JSON or any suitable format
+  user           User           @relation(fields: [userId], references: [id])
+  userId         Int
+}
+
+//Apps customisation could be taken as json string to stored in postgresl
