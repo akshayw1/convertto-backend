@@ -1,0 +1,84 @@
+{
+    "app_id": 1,
+    "config": {
+        "splashscreen": {
+            "active": true,
+            "options": {
+                "centericon": "imgurl",
+                "bgcolor": "string",
+                "bgimage": "imageurl"
+            }
+        },
+        "onboardingscreen": {
+            "screen_count": 1,
+            "active": true,
+            "options": {
+                
+                "bgcolor": "string",
+                "title": "string",
+                "description": "string",
+                "statusbar": true
+            }
+        },
+        "appbar": {
+            "active": true,
+            "options": {
+                "bgcolor": "string",
+                "bgicon": "imageurl",
+                "app_title": "string",
+                "app_alignment": "left/right/center",
+                "bar_fontsize": "INT"
+            }
+        },
+        "more_customisation": {
+            "active": true,
+            "options": {
+                "status_bar_color": "color",
+                "status_icon_color": "color",
+                "app_orientation": "landsacpe/portailetc",
+                "app_alignment": "left/right/center"
+            }
+        },
+        "bottom_navigation": {
+            "active": true,
+            "options": {
+                "bottom_bar_color": "color",
+                "bottom_bar_item_color": "color",
+                "menu_options_count": "2",
+                "menu_options": [
+                    {
+                        "name": "Home",
+                        "url": "/home",
+                        "icon": "home_icon_url"
+                    },
+                    {
+                        "name": "Profile",
+                        "url": "/profile",
+                        "icon": "profile_icon_url"
+                    }
+                ]
+            }
+        },
+        "sidebar": {
+            "active": true,
+            "options": {
+                "app_name": "app_name",
+                "side_bar_color": "color",
+                "side_bar_item_color": "color",
+                "side_options_count": "2",
+                "side_options": [
+                    {
+                        "name": "Home",
+                        "url": "/home",
+                        "icon": "home_icon_url"
+                    },
+                    {
+                        "name": "Profile",
+                        "url": "/profile",
+                        "icon": "profile_icon_url"
+                    }
+                ]
+            }
+        }
+    }
+}
