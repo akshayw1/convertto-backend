@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 import authRoutes from "../src/routes/auth.route.js";
 import userRoutes from "../src/routes/user.route.js";
 import appsRoutes from "./routes/apps.route.js";
+import featureRoutes from "./routes/features.route.js"
+import planRoutes from "./routes/plans.route.js"
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
@@ -26,6 +28,8 @@ app.get('/', (req, res) => {
 app.use("/api/v1/auth",authRoutes);
 app.use("/api/v1/user",userRoutes);
 app.use("/api/v1/apps",appsRoutes);
+app.use("/api/v1/feature",featureRoutes);
+app.use("/api/v1/plan",planRoutes)
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)

@@ -26,30 +26,48 @@ model User {
 
 model Subscription {
   id     Int    @id @default(autoincrement())
-  plan   Plan   @relation(fields: [planId], references: [id])
-  planId Int 
+  // plan   Plan   @relation(fields: [planId], references: [id])
+  planId Int
   users  User[]
 }
 
 model Plan {
-  id                Int            @id @default(autoincrement())
-  plan_name         String
-  plan_features     String
-  plan_category     String
-  plan_price        Int
-  plan_duration     String
-  app_build_allowed String
-  subcription       Subscription[]
+  id            Int           @id @default(autoincrement())
+  plan_name     String
+  features      Json
+  android_app    Boolean
+  ios_app       Boolean
+  cross_app      Boolean
+  nums_app       Int
+  plan_price    Int
+  plan_duration Int
 }
 
+// model PlanFeature {
+//   id       Int     @id @default(autoincrement())
+//   name     String
+//   included Boolean
+//   planId   Int
+//   plan     Plan    @relation(fields: [planId], references: [id])
+
+//   @@unique([planId])
+// }
+
+//plan
+enum AppType {
+  ANDROID
+  IOS
+  ANDROIDIOS
+}
 
 model App {
-  id             Int       @id @default(autoincrement())
-  user           User      @relation(fields: [userId], references: [id])
-  userId         Int
-  features       Features? // Define optional one-to-one relationship with Features
-  website_url    String
-  app_type      APP_TYPE
+  id          Int        @id @default(autoincrement())
+  user        User       @relation(fields: [userId], references: [id])
+  userId      Int
+  app_name    String
+  features    Features[] // Define optional one-to-one relationship with Features
+  website_url String
+  app_type    APP_TYPE
 }
 
 enum APP_TYPE {
@@ -58,11 +76,21 @@ enum APP_TYPE {
 }
 
 model Features {
-  id             Int       @id @default(autoincrement())
-  name           String    // Name of the feature
-  customization  Json      // Store customization options in JSON format
-  app            App       @relation(fields: [appId], references: [id])
-  appId          Int       @unique// Foreign key to associate feature with its app
+  id            Int          @id @default(autoincrement())
+  name          Feature_Name
+  customization Json // Store customization options in JSON format
+  app           App          @relation(fields: [appId], references: [id])
+  appId         Int // Foreign key to associate feature with its app
+  // @@index([appId, name], name: "appId_name_unique")
+
+  @@unique([appId, name])
 }
 
-  
+enum Feature_Name {
+  splashscreen
+  onboardingscreen
+  appbar
+  test1
+  test2
+  test3
+}

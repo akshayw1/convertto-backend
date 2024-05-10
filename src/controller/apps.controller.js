@@ -27,14 +27,32 @@ export const createApp = async (req, res) => {
   }
 };
 
+export const getAppforUser = async( req,res)=>{
+    const tokenUserId = req.userId;
+    try{
+        const userApps = await prisma.app.findMany({
+            where:{
+                userId:tokenUserId
+            }
+        })
+
+        res.status(200).json({data:userApps})
+    }catch(error){
+        console.error(error);
+        return res
+          .status(500)
+          .json({ error: "An error occurred while fetching apps for user" });
+    }
+}
+
 export const deleteApp = async (req, res) => {
-  const {id:appId} = req.params;
-  const userId = req.body;
+  const appId = parseInt(req.params.id);
+  const tokenUserId = req.userId;
 
   try {
     const app = await prisma.app.findUnique({
       where: {
-        id: appId,
+        id: appId
       },
     });
 
@@ -45,7 +63,7 @@ export const deleteApp = async (req, res) => {
         .json({ error: "An error occurred while delete app, App not found" });
     }
 
-    if (userId !== app.userId) {
+    if (tokenUserId !== app.userId) {
       return res
         .status(403)
         .json({
@@ -64,13 +82,9 @@ export const deleteApp = async (req, res) => {
     console.error(error);
     return res
       .status(500)
-      .json({ error: "An error occurred while create app" });
+      .json({ error: "An error occurred while delete app" });
   }
 };
 
 
-const addfeatures = async = (req,res) =>{
-    const featureName = req.body;
-    
 
-}

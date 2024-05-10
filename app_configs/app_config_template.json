@@ -11,9 +11,7 @@
         },
         "onboardingscreen": {
             "screen_count": 1,
-            "active": true,
             "options": {
-                
                 "bgcolor": "string",
                 "title": "string",
                 "description": "string",
