@@ -65,7 +65,7 @@ export const getPlan = async (req, res) => {
 
 
 export const deletePlan = async (req,res) => {
-    const planId = req.params.id;
+    const planId = parseInt(req.params.id);
     try{
         const plan = await prisma.plan.findUnique({
             where:{
@@ -83,12 +83,65 @@ export const deletePlan = async (req,res) => {
             }
         })
 
-        res.status(200).json(`${plan.plan_name} Deleted Successfully`)
+        res.status(200).json({message :`${plan.plan_name} Deleted Successfully`})
 
     }catch(error){
         console.log(error);
         return res
           .status(500)
           .json({ error: "An error occurred while Delete app" });
+    }
+}
+
+export const updatePlan = async (req,res) =>{
+    const planId = parseInt(req.params.id);
+    const {
+        name: planName,
+        andriod_app: androidApp,
+        ios_app: iosApp,
+        cross_app: crossApp,
+        nums_app: numsApp,
+        plan_price: planPrice,
+        plan_duration: planDuration,
+        features: feature,
+      } = req.body;
+
+      try{
+        const updatedPlan = await prisma.plan.update({
+            where:{
+                id:planId
+            },
+            data:{
+                plan_name: planName,
+                android_app: androidApp,
+                ios_app: iosApp,
+                cross_app: crossApp,
+                nums_app: numsApp,
+                plan_price: planPrice,
+                plan_duration: planDuration,
+                features:feature
+            }
+            
+        })
+
+        res.status(200).json({message :`Updated Successfully`,updatedPlan})
+
+      }catch(error){ 
+        console.log(error);
+        return res
+          .status(500)
+          .json({ error: "An error occurred while updating app" });
+      }
+}
+
+export const getAllPlans = async ( req,res) => {
+    try{
+        const plans = await prisma.plan.findMany({});
+        res.status(200).json({message:"All Plans fetched Successfully",plans})
+    }catch(error){
+        console.log(error);
+        return res
+          .status(500)
+          .json({ error: "An error occurred while fetching all app" });
     }
 }
