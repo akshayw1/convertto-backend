@@ -11,54 +11,50 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  first_name    String
-  last_name     String
-  phone_number  String
-  email         String         @unique
-  password      String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  subscriptions Subscription[]
-  apps          App[]
-  payment       Payments[]
-  isAdmin       Boolean        @default(false)
+  id               Int        @id @default(autoincrement())
+  first_name       String
+  last_name        String
+  phone_number     String
+  email            String     @unique
+  password         String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  subscribedPlan   Plan       @relation(fields: [subscribedPlanId], references: [id])
+  subscribedPlanId Int
+  subscriptionEnd  DateTime?
+  apps             App[]
+  payment          Payments[]
+  isAdmin          Boolean    @default(false)
 }
-
 
 model Payments {
-  id Int @id @default(autoincrement())
-  user User @relation(fields: [userId],references: [id])
-  userId Int
-  plan Plan @relation(fields: [planId],references: [id])
-  planId Int
-  status paymentStatus
+  id       Int           @id @default(autoincrement())
+  user     User          @relation(fields: [userId], references: [id])
+  userId   Int
+  plan     Plan          @relation(fields: [planId], references: [id])
+  planId   Int
+  status   paymentStatus
   stripeId String
 }
-enum paymentStatus{
-    success
-    fail
-    pending
-}
 
-model Subscription {
-  id     Int    @id @default(autoincrement())
-  // plan   Plan   @relation(fields: [planId], references: [id])
-  planId Int
-  users  User[]
+enum paymentStatus {
+  success
+  fail
+  pending
 }
 
 model Plan {
-  id            Int           @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   plan_name     String
   features      Json
-  android_app    Boolean
+  android_app   Boolean
   ios_app       Boolean
-  cross_app      Boolean
-  nums_app       Int
+  cross_app     Boolean
+  nums_app      Int
   plan_price    Int
   plan_duration Int
-  payments  Payments[]
+  payments      Payments[]
+  User          User[]
 }
 
 // model PlanFeature {
