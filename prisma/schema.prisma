@@ -21,7 +21,24 @@ model User {
   updatedAt     DateTime       @updatedAt
   subscriptions Subscription[]
   apps          App[]
+  payment       Payments[]
   isAdmin       Boolean        @default(false)
+}
+
+
+model Payments {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId],references: [id])
+  userId Int
+  plan Plan @relation(fields: [planId],references: [id])
+  planId Int
+  status paymentStatus
+  stripeId String
+}
+enum paymentStatus{
+    success
+    fail
+    pending
 }
 
 model Subscription {
@@ -41,6 +58,7 @@ model Plan {
   nums_app       Int
   plan_price    Int
   plan_duration Int
+  payments  Payments[]
 }
 
 // model PlanFeature {
