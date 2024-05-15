@@ -19,8 +19,8 @@ model User {
   password         String
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
-  subscribedPlan   Plan       @relation(fields: [subscribedPlanId], references: [id])
-  subscribedPlanId Int
+  subscribedPlan   Plan?       @relation(fields: [subscribedPlanId], references: [id])
+  subscribedPlanId Int?
   subscriptionEnd  DateTime?
   apps             App[]
   payment          Payments[]
@@ -28,13 +28,13 @@ model User {
 }
 
 model Payments {
-  id       Int           @id @default(autoincrement())
+  id       String        @id @default(uuid())
   user     User          @relation(fields: [userId], references: [id])
   userId   Int
   plan     Plan          @relation(fields: [planId], references: [id])
   planId   Int
   status   paymentStatus
-  stripeId String
+  stripeId String?
 }
 
 enum paymentStatus {
@@ -49,7 +49,6 @@ model Plan {
   features      Json
   android_app   Boolean
   ios_app       Boolean
-  cross_app     Boolean
   nums_app      Int
   plan_price    Int
   plan_duration Int

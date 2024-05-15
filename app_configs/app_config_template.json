@@ -1,47 +1,55 @@
 {
     "app_id": 1,
+    "app_name": "Wemofy",
+    "app_icon": "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@SVG.svg",
+    "app_package_name": "com.wemofy.appname",
     "config": {
         "splashscreen": {
             "active": true,
             "options": {
-                "centericon": "imgurl",
-                "bgcolor": "string",
-                "bgimage": "imageurl"
+                "centericon": "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@SVG.svg",
+                "bgcolor": "#fffff",
+                "bgimage": {
+                    "active": "false",
+                    "imageurl": "null"
+                }
             }
         },
         "onboardingscreen": {
-            "screen_count": 1,
-            "options": {
-                "bgcolor": "string",
-                "title": "string",
-                "description": "string",
-                "statusbar": true
-            }
+            "active": true,
+            "screen_count": 2,
+            "options": [
+                {
+                    "bgcolor": "#EDE8FA",
+                    "title": "Get Staretd With Wemofy",
+                    "bgimage": "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@SVG.svg",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec lectus in velit pulvinar ",
+                    "statusbar": true
+                },
+                {
+                    "bgcolor": "#EDE8FA",
+                    "title": "This is 2nd title",
+                    "bgimage": "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@SVG.svg",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec lectus in velit pulvinar ",
+                    "statusbar": true
+                }
+            ]
         },
         "appbar": {
             "active": true,
             "options": {
-                "bgcolor": "string",
-                "bgicon": "imageurl",
-                "app_title": "string",
-                "app_alignment": "left/right/center",
-                "bar_fontsize": "INT"
-            }
-        },
-        "more_customisation": {
-            "active": true,
-            "options": {
-                "status_bar_color": "color",
-                "status_icon_color": "color",
-                "app_orientation": "landsacpe/portailetc",
-                "app_alignment": "left/right/center"
+                "bgcolor": "#8D4BFA",
+                "bgicon": "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@SVG.svg",
+                "app_title": "Wemofyy",
+                "title_alignment": "left/right/center",
+                "title_fontsize": "20px"
             }
         },
         "bottom_navigation": {
             "active": true,
             "options": {
-                "bottom_bar_color": "color",
-                "bottom_bar_item_color": "color",
+                "bottom_bar_color": "#EDE8FA",
+                "bottom_bar_item_color": "#00000",
                 "menu_options_count": "2",
                 "menu_options": [
                     {
@@ -59,11 +67,13 @@
         },
         "sidebar": {
             "active": true,
+            "app_icon": "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@SVG.svg",
+            "app_name": "Wemofy",
+            "app_id": 1,
             "options": {
-                "app_name": "app_name",
                 "side_bar_color": "color",
                 "side_bar_item_color": "color",
-                "side_options_count": "2",
+                "side_options_count": "4",
                 "side_options": [
                     {
                         "name": "Home",
@@ -74,8 +84,41 @@
                         "name": "Profile",
                         "url": "/profile",
                         "icon": "profile_icon_url"
+                    },
+                    {
+                        "name": "Settings",
+                        "url": "/profile",
+                        "icon": "profile_icon_url"
+                    },
+                    {
+                        "name": "Help",
+                        "url": "/profile",
+                        "icon": "profile_icon_url"
                     }
                 ]
+            }
+        },
+        "more_customisation": {
+            "active": true,
+            "options": {
+                "status_bar_color": "#fffff",
+                "status_icon_color": "#0000",
+                "app_orientation": "portrait"
+            }
+        },
+        "extra_options": {
+            "active": true,
+            "options": {
+                "fullscreen": true,
+                "app_bgcolor": "#fff",
+                "circular_loader": {
+                    "active": true,
+                    "color": "#000"
+                },
+                "pulltorefresh": true,
+                "default_error_message": "Somtjing got wrong",
+                "try_again_text": "Tryy AGain text",
+                "double_press_exit": true
             }
         }
     }
