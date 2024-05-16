@@ -22,6 +22,7 @@ model User {
   subscribedPlan   Plan?       @relation(fields: [subscribedPlanId], references: [id])
   subscribedPlanId Int?
   subscriptionEnd  DateTime?
+  appCount        Int?
   apps             App[]
   payment          Payments[]
   isAdmin          Boolean    @default(false)
@@ -47,8 +48,8 @@ model Plan {
   id            Int        @id @default(autoincrement())
   plan_name     String
   features      Json
-  android_app   Boolean
-  ios_app       Boolean
+  android  Boolean
+  ios     Boolean
   nums_app      Int
   plan_price    Int
   plan_duration Int
@@ -68,9 +69,8 @@ model Plan {
 
 //plan
 enum AppType {
-  ANDROID
-  IOS
-  ANDROIDIOS
+  android
+  ios
 }
 
 model App {
@@ -84,8 +84,8 @@ model App {
 }
 
 enum APP_TYPE {
-  ANDROID
-  IOS
+  android
+  ios
 }
 
 model Features {

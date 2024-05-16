@@ -11,6 +11,7 @@ import prisma from "../lib/prisma.js";
 export const addfeatures = async (req, res) => {
   const { name: featureName } = req.body;
   const { options: featureCustomisation } = req.body;
+  const tokenUserId = req.userId;
   const appId = parseInt(req.params.appId);
   try {
     const app = await prisma.app.findUnique({
@@ -19,6 +20,10 @@ export const addfeatures = async (req, res) => {
   
       if (!app) {
         return res.status(404).json({ error: "App not found" });
+      }
+
+      if(tokenUserId !== app.userId){
+        return res.status(200).json({message:"You are not allowed to add features in other apps"})
       }
   
       // Check if the feature already exists for the given app ID
@@ -67,6 +72,7 @@ export const addfeatures = async (req, res) => {
 
 export const getFeaturesByApp = async (req, res) => {
   const appId = parseInt(req.params.appId);
+  const tokenUserId = req.userId;
   
   try {
     const appFeatures = await prisma.features.findMany({
@@ -74,6 +80,11 @@ export const getFeaturesByApp = async (req, res) => {
         appId: appId,
       },
     });
+
+    // if(tokenUserId !== app.userId){
+    //   return res.status(200).json({message:"You are not allowed to see features in other apps"})
+    // }
+
 
     res.status(200).json({ appFeatures });
   } catch (error) {

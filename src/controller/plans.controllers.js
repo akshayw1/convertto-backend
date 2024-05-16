@@ -8,8 +8,8 @@ import prisma from "../lib/prisma.js";
 export const createPlan = async (req, res) => {
   const {
     name: planName,
-    andriod_app: androidApp,
-    ios_app: iosApp,
+    android: androidApp,
+    ios: iosApp,
     nums_app: numsApp,
     plan_price: planPrice,
     plan_duration: planDuration,
@@ -19,8 +19,8 @@ export const createPlan = async (req, res) => {
     const plan = await prisma.plan.create({
       data: {
         plan_name: planName,
-        android_app: androidApp,
-        ios_app: iosApp,
+        android: androidApp,
+        ios: iosApp,
         nums_app: numsApp,
         plan_price: planPrice,
         plan_duration: planDuration,
@@ -95,8 +95,8 @@ export const updatePlan = async (req,res) =>{
     const planId = parseInt(req.params.id);
     const {
         name: planName,
-        andriod_app: androidApp,
-        ios_app: iosApp,
+        android: androidApp,
+        ios: iosApp,
         nums_app: numsApp,
         plan_price: planPrice,
         plan_duration: planDuration,
@@ -110,8 +110,8 @@ export const updatePlan = async (req,res) =>{
             },
             data:{
                 plan_name: planName,
-                android_app: androidApp,
-                ios_app: iosApp,
+                android: androidApp,
+                ios: iosApp,
                 nums_app: numsApp,
                 plan_price: planPrice,
                 plan_duration: planDuration,

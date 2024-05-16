@@ -53,7 +53,7 @@ export const addSubcriptionToUser = async (req, res) => {
     const lineItems = [
       {
         price_data: {
-          currency: "inr",
+          currency: "INR",
           unit_amount: plan.plan_price * 100,
           product_data: {
             name: plan.plan_name,
@@ -116,7 +116,7 @@ export const stripeSuccess = async (req, res) => {
         },
       });
 
-      const { planDuration } = subscribedPlan.plan_duration;
+      const  planDuration  = subscribedPlan.plan_duration;
 
       await prisma.user.update({
         where: { id: payment.userId },
@@ -125,16 +125,18 @@ export const stripeSuccess = async (req, res) => {
           subscriptionEnd: new Date(
             Date.now() + planDuration * 24 * 60 * 60 * 1000
           ),
+          appCount : subscribedPlan.nums_app
         },
       });
 
       const paymentStatus = "success";
     console.log(paymentId);
       await prisma.payments.update({
-        where: { id: paymentId },
+        where: { id: payId },
         data: {
           status: paymentStatus,
           stripeId: paymentId,
+          
         },
       });
 

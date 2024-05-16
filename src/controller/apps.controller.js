@@ -18,6 +18,17 @@ export const createApp = async (req, res) => {
       },
     });
 
+    await prisma.user.update({
+      where: {
+        id: tokenUserId
+      },
+      data: {
+        appCount: {
+          decrement: 1
+        }
+      }
+    });
+
     res.status(200).json({ message: "App created Successfully", app });
   } catch (error) {
     console.error(error);
