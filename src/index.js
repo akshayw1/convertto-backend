@@ -18,9 +18,12 @@ const port = process.env.APP_PORT || 5000
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.json());
+const corsOptions = {
+    origin: process.env.FRONTEND_BASE_URL, // Replace with your frontend URL
+    credentials: true, // Allows cookies to be sent with requests
+  };
 
-
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 app.get('/', (req, res) => {
     res.json({message:"Hello from Convertto Backend"});
@@ -37,4 +40,4 @@ app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
 })
 
-export default app
+export default app;

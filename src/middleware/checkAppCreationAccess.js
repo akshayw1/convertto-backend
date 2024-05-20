@@ -17,7 +17,8 @@ export const checkAppCreationAccess = async (req, res, next) => {
     }
 
     if(!user.appCount ){
-        return res.status(200).json({message: "You have reached your app limit"})
+        return res.status(200).json({message: "You have reached your app limit"});
+        
     }
     const plan = await prisma.plan.findUnique({
       where: {
