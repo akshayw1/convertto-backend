@@ -2,7 +2,7 @@ import prisma from "../lib/prisma.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.utils.js";
 import { createError } from "../utils/createError.utils.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (req, res) => {
   try {
@@ -43,25 +43,20 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const loginUser = async (req,res) =>{
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await prisma.user.findUnique({
     where: { email },
   });
 
   if (!user) {
-    return res
-    .status(404)
-    .json({ error: "User not found" });
-   
+    return res.status(404).json({ error: "User not found" });
   }
 
-  const isPasswordCorrect = await bcrypt.compare(password,user.password);
-  
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
   if (!isPasswordCorrect) {
-    return res
-    .status(404)
-    .json({ error: "Wrong Password" });
+    return res.status(404).json({ error: "Wrong Password" });
   }
 
   const cookie_age = 1000 * 60 * 60 * 24 * 7;
@@ -78,25 +73,25 @@ export const loginUser = async (req,res) =>{
 
   const { password: _, isAdmin: isAdminUser, ...otherDetails } = user;
 
-  res
-    .cookie("token", token, {
-      httpOnly: true,
-      maxAge: cookie_age,
-      secure: true,
-      sameSite: "Lax",
-    })
-    .status(200)
-    .json({
-      data: {
-        ...otherDetails,
-      },
-      isAdmin: isAdminUser,
-    });
-}
+  res.status(200).json({
+    data: {
+      token: token,
+      ...otherDetails,
+    },
+    isAdmin: isAdminUser,
+  });
+};
 
 export const logoutUser = (req, res) => {
-  res.clearCookie("token").status(200).json({ message: "Logout Succesfull" });
+  // Clear token from localStorage
+  localStorage.removeItem("token");
+  // Redirect to login page
+  // res.redirect("/");
+
+  // Respond with a success message
+  return res.status(200).json({ message: "Logout Successful" });
 };
+
 
 //login done
 //register done

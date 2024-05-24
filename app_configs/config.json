@@ -13,7 +13,7 @@
         "icon_color": "#000000"
       },
       "splashscreen": {
-        "active": false,
+        "active": true,
         "options": {
           "duration": 3,
           "centericon": "assets/icon.png",
@@ -22,7 +22,7 @@
           "bgimage": {
             "active": false,
             "imageurl": "https://cloudinary-marketing-res.cloudinary.com/images/w_1000,c_scale/v1679921049/Image_URL_header/Image_URL_header-png?_i=AA"
-          }
+          } 
         }
       },
       "onboardingscreen": {
@@ -41,7 +41,7 @@
             "title": "this is a script test Staretd With Wemofy",
             "titlecolor": "#000000",
             "descriptioncolor": "#232996",
-            "bgimage": "assets/onboardimage1.svg",
+            "bgimage": "  ",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec lectus in velit pulvinar "
   
           },
