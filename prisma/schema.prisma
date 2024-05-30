@@ -103,7 +103,7 @@ enum Feature_Name {
   splashscreen
   onboardingscreen
   appbar
-  test1
-  test2
-  test3
+  bottom_navigation
+  sidebar
+  extra_options
 }
